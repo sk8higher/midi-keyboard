@@ -20,8 +20,10 @@ int octave = 3;
 #define AD_BTN_PIN 12
 #define B_BTN_PIN 13
 
+// Пин потенциометра (ручки громкости)
 #define POT_PIN A0
 
+// Пины кнопок для переключения октав
 #define PLUS_OCT_BTN_PIN A1
 #define MINUS_OCT_BTN_PIN A2
 

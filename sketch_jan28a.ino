@@ -2,7 +2,6 @@
 #include <USB-MIDI.h>
 
 // номера midi-нот. стандартом принят отсчет от ноты c3 (60), в некоторых контроллерах yamaha - c4
-// 48 - c2, 60 - c3, 72 - c4?
 int default_notes[] = { 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71 };
 
 // Номер октавы для ограничения переключений
@@ -36,7 +35,6 @@ void setup() {
   // прилепляем обработчик событий на каждую кнопку
   // interval - debounce interval
   // pressedState - низкий т. к. не используется внешний резистор
-
   plusOctButton.attach(PLUS_OCT_BTN_PIN, INPUT_PULLUP);
   plusOctButton.interval(25);
   plusOctButton.setPressedState(LOW);
@@ -58,13 +56,15 @@ void setup() {
 
 void loop() {
   int rotat, velo;
-  // обновляем состояние кнопки
+  // обновляем состояние кнопок
   for(int i = 0; i < buttonCount; i++) buttons[i].update();
 
   plusOctButton.update();
   minusOctButton.update();
 
   rotat = analogRead(POT_PIN);
+  // velocity - громкость/сила нажатия ноты.
+  // 1023 / 8 = 127 - максимальное значение
   velo = rotat / 8;
 
   if(plusOctButton.pressed()) {
